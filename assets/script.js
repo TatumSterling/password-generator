@@ -10,36 +10,39 @@ var specialArray = ['!', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', 
 
 // array to add conditions to if user confirms
 var passwordinclude = [];
-//TODO figure out how to keep asking question until input is between 8 and 128
+var length = "";
 // function to ask about the password length
 function passwordLength() {
+  do {
   var length = prompt("Please select a number of characters between 8 and 128 that you would like your password to be");
-  if (length < 8) {
-    return alert("your password must be between 8 and 128 characters.");
-  } else if (length > 128) {
-    return alert("your password must be between 8 and 128 characters.");
-  } else if (length = null) {
-    return alert("please enter a value between 8 and 128.");
-  } else {
-  }
+  } while (length < 8 || length > 128); 
 }
 
-//TODO make sure that you're actually combining arrays 
+
+
 // function to ask what is to be included in the password
 function whichCharacters() {
   let lowercasePrompt = confirm("Would you like to include lowercase characters?")
-  if (lowercasePrompt) { 
-    passwordinclude.push(...lowercaseArray);}
+    if (lowercasePrompt) { 
+      passwordinclude= lowercaseArray;
+      console.log(passwordinclude);
+    }
   let uppercasePrompt = confirm("Would you like to include uppercase letters?")
-  if (uppercasePrompt) { 
-    passwordinclude.push(...uppercaseArray);}
+    if (uppercasePrompt) { 
+      passwordinclude= passwordinclude.concat(uppercaseArray);
+      console.log(passwordinclude);
+    }
   let numbersPrompt = confirm("Would you like to include numbers?")
-  if (numbersPrompt) { 
-    passwordinclude.push(...numbersArray);}
-  let specialArray = confirm("Would you like to include special characters?")
-  if (specialArray) { 
-    passwordinclude.push(...specialArray);}
-  }
+    if (numbersPrompt) {
+      passwordinclude = passwordinclude.concat(numbersArray);
+      console.log(passwordinclude);
+    }
+  let specialPrompt = confirm("Would you like to include special characters?")
+    if (specialPrompt) { 
+      passwordinclude = passwordinclude.concat(specialArray);
+      console.log(passwordinclude);
+    }
+}
 
 // function to invoke other functions in order
 function allTogetherNow() {
@@ -49,7 +52,8 @@ function allTogetherNow() {
 
 allTogetherNow();
 
-console.log(passwordinclude);
+console.log(length);
+
 //WHEN I click the button to generate a password
 //THEN I am presented with a series of prompts for password criteria
 var generateBtn = document.querySelector("#generate");
@@ -63,6 +67,7 @@ function writePassword() {
   passwordText.value = password;
 
 }
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);{

@@ -8,52 +8,66 @@ var numbersArray = ['1','2','3', '4', '5', '6', '7', '8', '9', '0'];
 // array of special characters to be included in the password
 var specialArray = ['!', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '^', '_', '{', '|', '}', '~'];
 
-// array to add conditions to if user confirms
+//global scope variables
 var passwordinclude = [];
-var length = "";
+var length = 8;
+var lowercaseRandom = "";
+var uppercaseRandom = "";
+var numbersRandom = "";
+var specialRandom = "";
+var passwordRandom = [];
+
 // function to ask about the password length
-function passwordLength() {
+function lengthPrompt() {
   do {
-  var length = prompt("Please select a number of characters between 8 and 128 that you would like your password to be");
-  } while (length < 8 || length > 128); 
+    length = parseInt(prompt("How many characters would you like your password to be?"));
+  } while (length < 8 || length > 128);
+  return length;
 }
 
 
-
-// function to ask what is to be included in the password
+// function to ask what is to be included in the password, and chooses one character to be randomized
 function whichCharacters() {
   let lowercasePrompt = confirm("Would you like to include lowercase characters?")
     if (lowercasePrompt) { 
-      passwordinclude= lowercaseArray;
+      passwordinclude = passwordinclude.concat(lowercaseArray);
+      lowercaseRandom = lowercaseArray[Math.floor(Math.random()*lowercaseArray.length)];
       console.log(passwordinclude);
     }
   let uppercasePrompt = confirm("Would you like to include uppercase letters?")
-    if (uppercasePrompt) { 
-      passwordinclude= passwordinclude.concat(uppercaseArray);
-      console.log(passwordinclude);
+    if (uppercasePrompt) {  
+      passwordinclude = passwordinclude.concat(uppercaseArray);
+      uppercaseRandom = uppercaseArray[Math.floor(Math.random()*uppercaseArray.length)];
     }
   let numbersPrompt = confirm("Would you like to include numbers?")
     if (numbersPrompt) {
       passwordinclude = passwordinclude.concat(numbersArray);
-      console.log(passwordinclude);
+      numbersRandom = numbersArray[Math.floor(Math.random()*numbersArray.length)];
     }
   let specialPrompt = confirm("Would you like to include special characters?")
     if (specialPrompt) { 
       passwordinclude = passwordinclude.concat(specialArray);
-      console.log(passwordinclude);
+      specialRandom = specialArray[Math.floor(Math.random()*specialArray.length)];
     }
 }
+// TODO fix bug in random password generator 
+function random() {
+  for (var i = 0; i < length; i++) {
+    passwordRandom = passwordinclude[Math.floor(Math.random()*passwordinclude.length)];
+  }
+  console.log(passwordRandom);
+}
 
+
+var generateBtn = document.querySelector("#generate");
 // function to invoke other functions in order
 function allTogetherNow() {
-  passwordLength();
+  lengthPrompt();
   whichCharacters();
+  random();
 }
 
 allTogetherNow();
-
-console.log(length);
-
 //WHEN I click the button to generate a password
 //THEN I am presented with a series of prompts for password criteria
 var generateBtn = document.querySelector("#generate");

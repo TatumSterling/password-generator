@@ -16,7 +16,9 @@ var uppercaseRandom = "";
 var numbersRandom = "";
 var specialRandom = "";
 var passwordRandom = [];
+var userPassword= "";
 
+//TODO need to add if statement to check if input is in range
 // function to ask about the password length
 function lengthPrompt() {
   do {
@@ -32,7 +34,7 @@ function whichCharacters() {
     if (lowercasePrompt) { 
       passwordinclude = passwordinclude.concat(lowercaseArray);
       lowercaseRandom = lowercaseArray[Math.floor(Math.random()*lowercaseArray.length)];
-      console.log(passwordinclude);
+      
     }
   let uppercasePrompt = confirm("Would you like to include uppercase letters?")
     if (uppercasePrompt) {  
@@ -48,26 +50,28 @@ function whichCharacters() {
     if (specialPrompt) { 
       passwordinclude = passwordinclude.concat(specialArray);
       specialRandom = specialArray[Math.floor(Math.random()*specialArray.length)];
+      console.log(passwordinclude);
     }
 }
-// TODO fix bug in random password generator 
-function random() {
-  for (var i = 0; i < length; i++) {
-    passwordRandom = passwordinclude[Math.floor(Math.random()*passwordinclude.length)];
+// loop that selects random characters out of passwordinlude array
+// adds those characters to array of random characters form whichCharacters function to ensure all criteria is met
+function generatePassword() {
+  for (var i = 0; i < length-4; i++) {
+    passwordRandom[i] = passwordinclude[Math.floor(Math.random()*passwordinclude.length)];
   }
   console.log(passwordRandom);
+  userPassword = passwordRandom.concat(...specialRandom, ...numbersRandom, ...uppercaseRandom, ...lowercaseRandom);
+  userPassword = userPassword.join(""); // takes out comma when concatenating arrays 
+  console.log(userPassword);
 }
-
-
-var generateBtn = document.querySelector("#generate");
 // function to invoke other functions in order
 function allTogetherNow() {
   lengthPrompt();
   whichCharacters();
-  random();
+  generatePassword()
 }
 
-allTogetherNow();
+
 //WHEN I click the button to generate a password
 //THEN I am presented with a series of prompts for password criteria
 var generateBtn = document.querySelector("#generate");
@@ -75,10 +79,11 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
 
-  var password = generatePassword();
+ allTogetherNow();
+ 
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  passwordText.value = userPassword;
 
 }
 

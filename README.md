@@ -15,7 +15,7 @@ N/A
 To deploy this webpage, click on the link at the top of the README file and it will take you to my password generator. From there you can click the generate password button and you will be asked a series of questions about the contents of your password. After the prompts, your password will generate into the text area where you can highlight and copy!
 
 below are images of my application
-![alt text](assets/images/09-10-2023.png)
+![alt text](assets/images/2023-09-10.png)
 
 ## Credits
 

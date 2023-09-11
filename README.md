@@ -1,5 +1,7 @@
 # password-generator
 
+https://tatumsterling.github.io/password-generator/
+
 ## Description
 
 This is my password generator.  To build this application I used simple javascript to ask the user for their input, and based on their answers produce a password that meets their requirements. If you require a strong password, my generator can provide what you need!
